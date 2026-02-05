@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Номера - Центр Отдыха "Иссык-Куль Резорт"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2><i class="fas fa-umbrella-beach"></i> Иссык-Куль Резорт</h2>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="rooms.html" class="active">Номера</a></li>
+                    <li><a href="gallery.html">Галерея</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+                <div class="burger" id="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Наши номера</h1>
+            <p>Выберите идеальное размещение для вашего отдыха</p>
+        </div>
+    </section>
+
+    <!-- Фильтр номеров -->
+    <section class="room-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Все номера</button>
+                <button class="filter-btn" data-filter="standard">Стандарт</button>
+                <button class="filter-btn" data-filter="deluxe">Люкс</button>
+                <button class="filter-btn" data-filter="cottage">Коттеджи</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Список номеров -->
+    <section class="rooms-list">
+        <div class="container">
+            <div class="rooms-detailed-grid">
+                <!-- Стандартный номер -->
+                <div class="room-detailed-card" data-category="standard">
+                    <div class="room-detailed-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=700&h=500&fit=crop" alt="Стандартный номер">
+                        <div class="room-badge">Популярный</div>
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3>Стандартный номер</h3>
+                        <p class="room-description">Уютный номер площадью 25 м² с современным ремонтом и всеми удобствами. Идеально подходит для пары или небольшой семьи.</p>
+                        
+                        <div class="room-amenities">
+                            <h4>Удобства:</h4>
+                            <ul>
+                                <li>✓ Двуспальная кровать или две односпальные</li>
+                                <li>✓ Кондиционер</li>
+                                <li>✓ Wi-Fi</li>
+                                <li>✓ Телевизор со спутниковыми каналами</li>
+                                <li>✓ Мини-холодильник</li>
+                                <li>✓ Санузел с душевой кабиной</li>
+                                <li>✓ Фен и косметические принадлежности</li>
+                                <li>✓ Балкон с видом на горы</li>
+                            </ul>
+                        </div>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость: 2 человека</span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: 25 м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount">3500 сом</span>
+                            </div>
+                            <button class="btn btn-primary booking-btn">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Стандарт плюс -->
+                <div class="room-detailed-card" data-category="standard">
+                    <div class="room-detailed-image">
+                        <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=700&h=500&fit=crop" alt="Стандарт плюс">
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3>Стандарт плюс</h3>
+                        <p class="room-description">Просторный номер 30 м² с улучшенной мебелью и дополнительными удобствами. Прекрасный выбор для комфортного проживания.</p>
+                        
+                        <div class="room-amenities">
+                            <h4>Удобства:</h4>
+                            <ul>
+                                <li>✓ Большая двуспальная кровать</li>
+                                <li>✓ Кондиционер и обогреватель</li>
+                                <li>✓ Wi-Fi высокой скорости</li>
+                                <li>✓ LED телевизор 43"</li>
+                                <li>✓ Мини-бар</li>
+                                <li>✓ Сейф</li>
+                                <li>✓ Санузел с ванной</li>
+                                <li>✓ Халаты и тапочки</li>
+                                <li>✓ Просторный балкон с креслами</li>
+                            </ul>
+                        </div>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость: 2-3 человека</span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: 30 м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount">4500 сом</span>
+                            </div>
+                            <button class="btn btn-primary booking-btn">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Люкс с видом на озеро -->
+                <div class="room-detailed-card" data-category="deluxe">
+                    <div class="room-detailed-image">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=700&h=500&fit=crop" alt="Люкс с видом на озеро">
+                        <div class="room-badge">Лучший вид</div>
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3>Люкс с видом на озеро</h3>
+                        <p class="room-description">Премиальный номер 40 м² с панорамным видом на Иссык-Куль. Современный дизайн и максимальный комфорт для самых взыскательных гостей.</p>
+                        
+                        <div class="room-amenities">
+                            <h4>Удобства:</h4>
+                            <ul>
+                                <li>✓ King-size кровать премиум класса</li>
+                                <li>✓ Климат-контроль</li>
+                                <li>✓ Зона отдыха с диваном</li>
+                                <li>✓ Рабочий стол</li>
+                                <li>✓ Smart TV 55"</li>
+                                <li>✓ Мини-бар с напитками</li>
+                                <li>✓ Кофемашина Nespresso</li>
+                                <li>✓ Джакузи и отдельная душевая</li>
+                                <li>✓ Премиум косметика</li>
+                                <li>✓ Большой балкон с шезлонгами</li>
+                            </ul>
+                        </div>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость: 2-3 человека</span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: 40 м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount">6500 сом</span>
+                            </div>
+                            <button class="btn btn-primary booking-btn">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Президентский люкс -->
+                <div class="room-detailed-card" data-category="deluxe">
+                    <div class="room-detailed-image">
+                        <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?w=700&h=500&fit=crop" alt="Президентский люкс">
+                        <div class="room-badge">VIP</div>
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3>Президентский люкс</h3>
+                        <p class="room-description">Роскошные апартаменты 65 м² с двумя комнатами и эксклюзивным дизайном. Для тех, кто привык к лучшему.</p>
+                        
+                        <div class="room-amenities">
+                            <h4>Удобства:</h4>
+                            <ul>
+                                <li>✓ Две спальни с King-size кроватями</li>
+                                <li>✓ Гостиная с камином</li>
+                                <li>✓ Кухонный уголок</li>
+                                <li>✓ Столовая зона на 6 персон</li>
+                                <li>✓ 2 санузла с премиум сантехникой</li>
+                                <li>✓ Домашний кинотеатр</li>
+                                <li>✓ Личный сейф</li>
+                                <li>✓ Бар с алкогольными напитками</li>
+                                <li>✓ Огромная терраса 20 м²</li>
+                                <li>✓ Услуги личного консьержа</li>
+                            </ul>
+                        </div>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость: 4-6 человек</span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: 65 м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount">15000 сом</span>
+                            </div>
+                            <button class="btn btn-primary booking-btn">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Семейный коттедж -->
+                <div class="room-detailed-card" data-category="cottage">
+                    <div class="room-detailed-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=700&h=500&fit=crop" alt="Семейный коттедж">
+                        <div class="room-badge">Для семьи</div>
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3>Семейный коттедж</h3>
+                        <p class="room-description">Отдельный двухэтажный коттедж 80 м² с тремя спальнями. Идеальный вариант для семейного отдыха или компании друзей.</p>
+                        
+                        <div class="room-amenities">
+                            <h4>Удобства:</h4>
+                            <ul>
+                                <li>✓ 3 спальни с комфортными кроватями</li>
+                                <li>✓ Просторная гостиная</li>
+                                <li>✓ Полностью оборудованная кухня</li>
+                                <li>✓ Столовая на 8 персон</li>
+                                <li>✓ 2 санузла</li>
+                                <li>✓ Стиральная машина</li>
+                                <li>✓ 2 телевизора</li>
+                                <li>✓ Wi-Fi роутер</li>
+                                <li>✓ Терраса с мангалом</li>
+                                <li>✓ Частная парковка</li>
+                            </ul>
+                        </div>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость: 6-8 человек</span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: 80 м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount">12000 сом</span>
+                            </div>
+                            <button class="btn btn-primary booking-btn">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIP коттедж -->
+                <div class="room-detailed-card" data-category="cottage">
+                    <div class="room-detailed-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&h=500&fit=crop" alt="VIP коттедж">
+                        <div class="room-badge">Премиум</div>
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3>VIP коттедж у озера</h3>
+                        <p class="room-description">Эксклюзивный коттедж 120 м² в 10 метрах от озера с собственным пляжем. Максимальная приватность и роскошь.</p>
+                        
+                        <div class="room-amenities">
+                            <h4>Удобства:</h4>
+                            <ul>
+                                <li>✓ 4 спальни с дизайнерским ремонтом</li>
+                                <li>✓ Гостиная 40 м²</li>
+                                <li>✓ Современная кухня с техникой</li>
+                                <li>✓ Винный погреб</li>
+                                <li>✓ 3 санузла с люксовой сантехникой</li>
+                                <li>✓ Частная сауна</li>
+                                <li>✓ Бильярдная</li>
+                                <li>✓ Кинозал</li>
+                                <li>✓ Бассейн с подогревом</li>
+                                <li>✓ Собственный причал</li>
+                                <li>✓ Услуги повара и горничной</li>
+                            </ul>
+                        </div>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость: 8-10 человек</span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: 120 м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount">25000 сом</span>
+                            </div>
+                            <button class="btn btn-primary booking-btn">Забронировать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дополнительная информация -->
+    <section class="booking-info">
+        <div class="container">
+            <h2 class="section-title">Условия бронирования</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Заезд / Выезд</h3>
+                    <p>Заезд: с 14:00<br>Выезд: до 12:00<br>Ранний заезд и поздний выезд по договоренности</p>
+                </div>
+                <div class="info-card">
+                    <h3>Отмена бронирования</h3>
+                    <p>Бесплатная отмена за 7 дней до заезда<br>При отмене менее чем за 7 дней - оплата 50%</p>
+                </div>
+                <div class="info-card">
+                    <h3>Питание</h3>
+                    <p>Завтрак включен в стоимость<br>Обед и ужин - по меню ресторана<br>Возможен заказ полного пансиона</p>
+                </div>
+                <div class="info-card">
+                    <h3>Дополнительно</h3>
+                    <p>Дети до 6 лет - бесплатно<br>Дополнительное место - 1000 сом/ночь<br>Питомцы размещаются по согласованию</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>О нас</h3>
+                    <p>Центр отдыха "Иссык-Куль Резорт" - ваш идеальный выбор для незабываемого отдыха на берегу горного озера.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="rooms.html">Номера</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Северный берег Иссык-Куля, Чолпон-Ата</li>
+                        <li><i class="fas fa-phone"></i> +996 555 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@issykkul-resort.kg</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Режим работы</h3>
+                    <ul>
+                        <li>Круглосуточная регистрация</li>
+                        <li>Ресторан: 07:00 - 23:00</li>
+                        <li>Пляж: 06:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Иссык-Куль Резорт. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

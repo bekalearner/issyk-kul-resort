@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Центр Отдыха "Иссык-Куль Резорт"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2><i class="fas fa-umbrella-beach"></i> Иссык-Куль Резорт</h2>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="rooms.html">Номера</a></li>
+                    <li><a href="gallery.html">Галерея</a></li>
+                    <li><a href="contacts.html" class="active">Контакты</a></li>
+                </ul>
+                <div class="burger" id="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Свяжитесь с нами</h1>
+            <p>Мы всегда рады ответить на ваши вопросы</p>
+        </div>
+    </section>
+
+    <!-- Контактная информация -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <h3>Телефоны</h3>
+                    <p><a href="tel:+996555123456">+996 555 123 456</a></p>
+                    <p><a href="tel:+996312345678">+996 312 345 678</a></p>
+                    <p class="contact-note">Круглосуточно</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@issykkul-resort.kg">info@issykkul-resort.kg</a></p>
+                    <p><a href="mailto:booking@issykkul-resort.kg">booking@issykkul-resort.kg</a></p>
+                    <p class="contact-note">Ответим в течение часа</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Адрес</h3>
+                    <p>Кыргызстан, Иссык-Кульская область</p>
+                    <p>г. Чолпон-Ата, северный берег</p>
+                    <p class="contact-note">Напротив горы Бозбиик</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Режим работы</h3>
+                    <p>Регистрация: 24/7</p>
+                    <p>Ресторан: 07:00 - 23:00</p>
+                    <p class="contact-note">Без выходных</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма обратной связи -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <h2>Отправьте нам сообщение</h2>
+                    <p>Заполните форму ниже, и наши менеджеры свяжутся с вами в ближайшее время</p>
+                    
+                    <div class="social-links">
+                        <h3>Мы в социальных сетях:</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook"></i> Facebook</a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="#" class="social-icon"><i class="fab fa-telegram"></i> Telegram</a>
+                        </div>
+                    </div>
+
+                    <div class="transport-info">
+                        <h3>Как добраться:</h3>
+                        <ul>
+                            <li><strong>Из Бишкека:</strong> 250 км, около 4 часов на авто</li>
+                            <li><strong>Из Алматы:</strong> 400 км, около 6 часов</li>
+                            <li><strong>Трансфер:</strong> Организуем встречу в аэропорту Манас</li>
+                            <li><strong>Маршрутка:</strong> От Западного автовокзала Бишкека</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+996">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Количество гостей</label>
+                        <select id="guests" name="guests">
+                            <option value="">Выберите</option>
+                            <option value="1">1 гость</option>
+                            <option value="2">2 гостя</option>
+                            <option value="3">3 гостя</option>
+                            <option value="4">4 гостя</option>
+                            <option value="5">5+ гостей</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkin">Заезд</label>
+                            <input type="date" id="checkin" name="checkin">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkout">Выезд</label>
+                            <input type="date" id="checkout" name="checkout">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Ваше сообщение *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">Отправить сообщение</button>
+                    
+                    <p class="form-note">* Обязательные поля</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Наше расположение</h2>
+            <div class="map-wrapper">
+                <div class="map-placeholder">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95273.04470938982!2d76.97947567253903!3d42.64784282611988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389cf9e39befc3bb%3A0x753f2a6767ff6b22!2z0KfQvtC70L_QvtC9LdCQ0YLQsA!5e0!3m2!1sru!2skg!4v1234567890"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">Какие документы нужны для заселения?</h3>
+                    <div class="faq-answer">
+                        <p>Для граждан Кыргызстана - паспорт или ID-карта. Для иностранных граждан - загранпаспорт. Для детей - свидетельство о рождении.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Есть ли бесплатная парковка?</h3>
+                    <div class="faq-answer">
+                        <p>Да, для всех гостей доступна бесплатная охраняемая парковка на территории курорта.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Можно ли с домашними животными?</h3>
+                    <div class="faq-answer">
+                        <p>Размещение с питомцами возможно в отдельных номерах и коттеджах по предварительному согласованию. Дополнительная плата - 500 сом/сутки.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Включен ли завтрак в стоимость?</h3>
+                    <div class="faq-answer">
+                        <p>Да, во все тарифы включен завтрак-шведский стол с 07:00 до 11:00.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Есть ли трансфер из аэропорта?</h3>
+                    <div class="faq-answer">
+                        <p>Да, мы организуем трансфер из аэропорта Манас. Стоимость - 4000 сом за автомобиль (до 4 человек). Бронировать нужно заранее.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Какой сезон лучше для отдыха?</h3>
+                    <div class="faq-answer">
+                        <p>Пляжный сезон - с июня по сентябрь. Температура воды летом +18-22°C. Весной и осенью отличные условия для экскурсий и прогулок.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Остались вопросы?</h2>
+            <p>Позвоните нам прямо сейчас!</p>
+            <a href="tel:+996555123456" class="btn btn-primary btn-large">+996 555 123 456</a>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>О нас</h3>
+                    <p>Центр отдыха "Иссык-Куль Резорт" - ваш идеальный выбор для незабываемого отдыха на берегу горного озера.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="rooms.html">Номера</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Северный берег Иссык-Куля, Чолпон-Ата</li>
+                        <li><i class="fas fa-phone"></i> +996 555 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@issykkul-resort.kg</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Режим работы</h3>
+                    <ul>
+                        <li>Круглосуточная регистрация</li>
+                        <li>Ресторан: 07:00 - 23:00</li>
+                        <li>Пляж: 06:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Иссык-Куль Резорт. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
