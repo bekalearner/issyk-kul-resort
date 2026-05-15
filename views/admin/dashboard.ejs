@@ -1,0 +1,58 @@
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-bed"></i></div>
+        <div>
+            <div class="stat-value"><%= stats.rooms %></div>
+            <div class="stat-label">Номеров</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon stat-icon--accent"><i class="fas fa-images"></i></div>
+        <div>
+            <div class="stat-value"><%= stats.gallery %></div>
+            <div class="stat-label">Фото в галерее</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon <%= stats.unread > 0 ? 'stat-icon--alert' : '' %>"><i class="fas fa-envelope"></i></div>
+        <div>
+            <div class="stat-value"><%= stats.unread %></div>
+            <div class="stat-label">Непрочитанных сообщений</div>
+        </div>
+    </div>
+</div>
+
+<div class="admin-card">
+    <h2 style="margin-bottom: 16px; font-size: 18px;">Последние сообщения</h2>
+    <% if (latest && latest.length) { %>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Имя</th>
+                    <th>Телефон</th>
+                    <th>Сообщение</th>
+                    <th class="col-actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% latest.forEach(function (m) { %>
+                    <tr>
+                        <td><%= new Date(m.createdAt).toLocaleString('ru-RU') %></td>
+                        <td><strong><%= m.name %></strong></td>
+                        <td><%= m.phone %></td>
+                        <td><%= (m.message || '').slice(0, 80) %><%= m.message && m.message.length > 80 ? '…' : '' %></td>
+                        <td class="col-actions">
+                            <a href="/admin/messages/<%= m.id %>" class="btn-admin btn-sm btn-link">Открыть</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>Новых сообщений нет</p>
+        </div>
+    <% } %>
+</div>

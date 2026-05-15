@@ -1,0 +1,55 @@
+<div class="admin-toolbar">
+    <a href="/admin/team" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+</div>
+
+<form action="<%= item ? '/admin/team/' + item.id : '/admin/team' %>" method="POST" enctype="multipart/form-data" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (item) { %><input type="hidden" name="_method" value="PUT"><% } %>    <div class="form-grid">
+        <div class="form-field <%= errors.name ? 'has-error' : '' %>">
+            <label for="name">Имя <span class="required-marker">*</span></label>
+            <input id="name" type="text" name="name" required minlength="2" maxlength="200" value="<%= formData.name || '' %>">
+            <%- include('../../partials/field-error', { field: 'name' }) %>
+        </div>
+
+        <div class="form-field <%= errors.role ? 'has-error' : '' %>">
+            <label for="role">Должность <span class="required-marker">*</span></label>
+            <input id="role" type="text" name="role" required minlength="2" maxlength="200" value="<%= formData.role || '' %>">
+            <%- include('../../partials/field-error', { field: 'role' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.bio ? 'has-error' : '' %>">
+            <label for="bio">Биография <span class="field-help">опционально, до 2000 символов</span></label>
+            <textarea id="bio" name="bio" rows="3" maxlength="2000"><%= formData.bio || '' %></textarea>
+            <%- include('../../partials/field-error', { field: 'bio' }) %>
+        </div>
+
+        <div class="form-field <%= errors.order ? 'has-error' : '' %>">
+            <label for="order">Порядок</label>
+            <input id="order" type="number" name="order" value="<%= formData.order || 0 %>">
+            <%- include('../../partials/field-error', { field: 'order' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.imagePath ? 'has-error' : '' %>">
+            <label for="imagePath">URL фото <span class="field-help">или загрузите файл ниже</span></label>
+            <input id="imagePath" type="text" name="imagePath" value="<%= formData.imagePath || '' %>">
+            <%- include('../../partials/field-error', { field: 'imagePath' }) %>
+        </div>
+
+        <div class="form-field form-row-full">
+            <label for="image">Загрузить файл <span class="field-help">jpg/png/webp, до 10 МБ</span></label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary"><%= item ? 'Сохранить' : 'Создать' %></button>
+        <a href="/admin/team" class="btn-admin">Отмена</a>
+    </div>
+</form>
+
+<% if (item && item.imagePath) { %>
+    <div class="admin-card" style="margin-top:24px">
+        <h2 style="font-size:18px;margin-bottom:12px">Текущее фото</h2>
+        <img src="<%= item.imagePath %>" alt="" style="max-width:300px;border-radius:8px">
+    </div>
+<% } %>

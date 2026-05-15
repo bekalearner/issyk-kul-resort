@@ -1,0 +1,138 @@
+<form action="/admin/settings" method="POST" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="_method" value="PUT">
+
+    <fieldset style="border:none;padding:0;margin-bottom:32px">
+        <legend style="font-size:18px;font-weight:600;margin-bottom:16px">Контакты</legend>
+        <div class="form-grid">
+            <div class="form-field <%= errors.phonePrimary ? 'has-error' : '' %>">
+                <label for="phonePrimary">Основной телефон <span class="required-marker">*</span></label>
+                <input id="phonePrimary" name="phonePrimary" type="text" required maxlength="80" value="<%= formData.phonePrimary || '' %>">
+                <%- include('../partials/field-error', { field: 'phonePrimary' }) %>
+            </div>
+            <div class="form-field <%= errors.phoneSecondary ? 'has-error' : '' %>">
+                <label for="phoneSecondary">Дополнительный телефон</label>
+                <input id="phoneSecondary" name="phoneSecondary" type="text" maxlength="80" value="<%= formData.phoneSecondary || '' %>">
+                <%- include('../partials/field-error', { field: 'phoneSecondary' }) %>
+            </div>
+            <div class="form-field <%= errors.emailPrimary ? 'has-error' : '' %>">
+                <label for="emailPrimary">Основной email <span class="required-marker">*</span></label>
+                <input id="emailPrimary" name="emailPrimary" type="email" required maxlength="200" value="<%= formData.emailPrimary || '' %>">
+                <%- include('../partials/field-error', { field: 'emailPrimary' }) %>
+            </div>
+            <div class="form-field <%= errors.emailSecondary ? 'has-error' : '' %>">
+                <label for="emailSecondary">Дополнительный email</label>
+                <input id="emailSecondary" name="emailSecondary" type="email" maxlength="200" value="<%= formData.emailSecondary || '' %>">
+                <%- include('../partials/field-error', { field: 'emailSecondary' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.addressLine1 ? 'has-error' : '' %>">
+                <label for="addressLine1">Адрес, строка 1 <span class="required-marker">*</span></label>
+                <input id="addressLine1" name="addressLine1" required maxlength="400" value="<%= formData.addressLine1 || '' %>">
+                <%- include('../partials/field-error', { field: 'addressLine1' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.addressLine2 ? 'has-error' : '' %>">
+                <label for="addressLine2">Адрес, строка 2 <span class="required-marker">*</span></label>
+                <input id="addressLine2" name="addressLine2" required maxlength="400" value="<%= formData.addressLine2 || '' %>">
+                <%- include('../partials/field-error', { field: 'addressLine2' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.addressNote ? 'has-error' : '' %>">
+                <label for="addressNote">Примечание к адресу</label>
+                <input id="addressNote" name="addressNote" maxlength="400" value="<%= formData.addressNote || '' %>">
+                <%- include('../partials/field-error', { field: 'addressNote' }) %>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset style="border:none;padding:0;margin-bottom:32px">
+        <legend style="font-size:18px;font-weight:600;margin-bottom:16px">Главная страница</legend>
+        <div class="form-grid">
+            <div class="form-field form-row-full <%= errors.heroTitle ? 'has-error' : '' %>">
+                <label for="heroTitle">Заголовок героя <span class="required-marker">*</span></label>
+                <input id="heroTitle" name="heroTitle" required maxlength="400" value="<%= formData.heroTitle || '' %>">
+                <%- include('../partials/field-error', { field: 'heroTitle' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.heroSubtitle ? 'has-error' : '' %>">
+                <label for="heroSubtitle">Подзаголовок героя <span class="required-marker">*</span></label>
+                <input id="heroSubtitle" name="heroSubtitle" required maxlength="400" value="<%= formData.heroSubtitle || '' %>">
+                <%- include('../partials/field-error', { field: 'heroSubtitle' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.heroImageUrl ? 'has-error' : '' %>">
+                <label for="heroImageUrl">URL фона героя <span class="required-marker">*</span></label>
+                <input id="heroImageUrl" name="heroImageUrl" required maxlength="800" value="<%= formData.heroImageUrl || '' %>">
+                <%- include('../partials/field-error', { field: 'heroImageUrl' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.aboutPreviewTitle ? 'has-error' : '' %>">
+                <label for="aboutPreviewTitle">Заголовок «О курорте» (превью) <span class="required-marker">*</span></label>
+                <input id="aboutPreviewTitle" name="aboutPreviewTitle" required maxlength="400" value="<%= formData.aboutPreviewTitle || '' %>">
+                <%- include('../partials/field-error', { field: 'aboutPreviewTitle' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.aboutPreviewText ? 'has-error' : '' %>">
+                <label for="aboutPreviewText">Текст «О курорте» (превью) <span class="required-marker">*</span></label>
+                <textarea id="aboutPreviewText" name="aboutPreviewText" rows="4" required maxlength="4000"><%= formData.aboutPreviewText || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'aboutPreviewText' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.footerAboutText ? 'has-error' : '' %>">
+                <label for="footerAboutText">Текст подвала <span class="required-marker">*</span></label>
+                <input id="footerAboutText" name="footerAboutText" required maxlength="1000" value="<%= formData.footerAboutText || '' %>">
+                <%- include('../partials/field-error', { field: 'footerAboutText' }) %>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset style="border:none;padding:0;margin-bottom:32px">
+        <legend style="font-size:18px;font-weight:600;margin-bottom:16px">Страница «О нас»</legend>
+        <div class="form-grid">
+            <div class="form-field form-row-full <%= errors.aboutHistory ? 'has-error' : '' %>">
+                <label for="aboutHistory">История <span class="required-marker">*</span></label>
+                <textarea id="aboutHistory" name="aboutHistory" rows="6" required maxlength="8000"><%= formData.aboutHistory || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'aboutHistory' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.lakeText ? 'has-error' : '' %>">
+                <label for="lakeText">Текст об озере <span class="required-marker">*</span></label>
+                <textarea id="lakeText" name="lakeText" rows="4" required maxlength="4000"><%= formData.lakeText || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'lakeText' }) %>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset style="border:none;padding:0;margin-bottom:32px">
+        <legend style="font-size:18px;font-weight:600;margin-bottom:16px">Карта</legend>
+        <div class="form-grid">
+            <div class="form-field form-row-full <%= errors.mapEmbedSrc ? 'has-error' : '' %>">
+                <label for="mapEmbedSrc">URL Google Maps iframe <span class="required-marker">*</span></label>
+                <input id="mapEmbedSrc" name="mapEmbedSrc" required value="<%= formData.mapEmbedSrc || '' %>">
+                <%- include('../partials/field-error', { field: 'mapEmbedSrc' }) %>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset style="border:none;padding:0;margin-bottom:32px">
+        <legend style="font-size:18px;font-weight:600;margin-bottom:16px">JSON-поля <span class="field-help">структурированные данные в формате JSON</span></legend>
+        <div class="form-grid">
+            <div class="form-field form-row-full <%= errors.workingHours ? 'has-error' : '' %>">
+                <label for="workingHours">workingHours <span class="field-help">{ "reception": "24/7", "restaurant": "...", "beach": "..." }</span></label>
+                <textarea id="workingHours" name="workingHours" rows="4" style="font-family:monospace;font-size:13px"><%= formData.workingHours || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'workingHours' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.lakeStats ? 'has-error' : '' %>">
+                <label for="lakeStats">lakeStats <span class="field-help">[{ "label": "...", "value": "..." }, ...]</span></label>
+                <textarea id="lakeStats" name="lakeStats" rows="6" style="font-family:monospace;font-size:13px"><%= formData.lakeStats || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'lakeStats' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.socialLinks ? 'has-error' : '' %>">
+                <label for="socialLinks">socialLinks <span class="field-help">{ "facebook": "...", "instagram": "...", "whatsapp": "...", "telegram": "..." }</span></label>
+                <textarea id="socialLinks" name="socialLinks" rows="4" style="font-family:monospace;font-size:13px"><%= formData.socialLinks || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'socialLinks' }) %>
+            </div>
+            <div class="form-field form-row-full <%= errors.transportInfo ? 'has-error' : '' %>">
+                <label for="transportInfo">transportInfo <span class="field-help">[{ "label": "...", "text": "..." }, ...]</span></label>
+                <textarea id="transportInfo" name="transportInfo" rows="6" style="font-family:monospace;font-size:13px"><%= formData.transportInfo || '' %></textarea>
+                <%- include('../partials/field-error', { field: 'transportInfo' }) %>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary">Сохранить настройки</button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="admin-toolbar">
+    <a href="/admin/faqs" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+</div>
+
+<form action="<%= item ? '/admin/faqs/' + item.id : '/admin/faqs' %>" method="POST" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (item) { %><input type="hidden" name="_method" value="PUT"><% } %>    <div class="form-grid">
+        <div class="form-field form-row-full <%= errors.question ? 'has-error' : '' %>">
+            <label for="question">Вопрос <span class="required-marker">*</span></label>
+            <input id="question" type="text" name="question" required minlength="5" maxlength="500" value="<%= formData.question || '' %>">
+            <%- include('../../partials/field-error', { field: 'question' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.answer ? 'has-error' : '' %>">
+            <label for="answer">Ответ <span class="required-marker">*</span> <span class="field-help">5-2000 символов</span></label>
+            <textarea id="answer" name="answer" rows="4" required minlength="5" maxlength="2000"><%= formData.answer || '' %></textarea>
+            <%- include('../../partials/field-error', { field: 'answer' }) %>
+        </div>
+
+        <div class="form-field <%= errors.order ? 'has-error' : '' %>">
+            <label for="order">Порядок</label>
+            <input id="order" type="number" name="order" value="<%= formData.order || 0 %>">
+            <%- include('../../partials/field-error', { field: 'order' }) %>
+        </div>
+
+        <div class="form-field form-field--checkbox">
+            <input id="active" type="checkbox" name="active" value="on" <%= (formData.active === undefined || formData.active) ? 'checked' : '' %>>
+            <label for="active">Активен (показывать на сайте)</label>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary"><%= item ? 'Сохранить' : 'Создать' %></button>
+        <a href="/admin/faqs" class="btn-admin">Отмена</a>
+    </div>
+</form>

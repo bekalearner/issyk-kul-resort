@@ -1,0 +1,32 @@
+<div class="admin-toolbar">
+    <h2>Отзывы (<%= items.length %>)</h2>
+    <a href="/admin/testimonials/new" class="btn-admin btn-primary"><i class="fas fa-plus"></i> Добавить</a>
+</div>
+
+<% if (items.length) { %>
+    <table class="admin-table">
+        <thead>
+            <tr><th>Автор</th><th>Город</th><th>Рейтинг</th><th>Текст</th><th>На главной</th><th class="col-actions"></th></tr>
+        </thead>
+        <tbody>
+            <% items.forEach(function (t) { %>
+                <tr>
+                    <td><strong><%= t.author %></strong></td>
+                    <td><%= t.city %></td>
+                    <td><% for (var i = 0; i < t.rating; i++) { %>★<% } %></td>
+                    <td><%= (t.text || '').slice(0, 90) %><%= t.text && t.text.length > 90 ? '…' : '' %></td>
+                    <td><% if (t.featured) { %><span class="badge badge--featured">Топ</span><% } %></td>
+                    <td class="col-actions">
+                        <a href="/admin/testimonials/<%= t.id %>/edit" class="btn-admin btn-sm btn-link">Изменить</a>
+                        <form action="/admin/testimonials/<%= t.id %>?_method=DELETE" method="POST" data-confirm="Удалить отзыв?" style="display:inline">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn-admin btn-sm btn-link btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %>
+    <div class="empty-state"><i class="fas fa-comment-dots"></i><p>Отзывов пока нет</p></div>
+<% } %>

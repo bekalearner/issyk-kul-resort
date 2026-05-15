@@ -1,0 +1,157 @@
+<div class="admin-toolbar">
+    <a href="/admin/rooms" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+</div>
+
+<form action="<%= room ? '/admin/rooms/' + room.id : '/admin/rooms' %>" method="POST" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (room) { %><input type="hidden" name="_method" value="PUT"><% } %>
+
+    <div class="form-grid">
+        <div class="form-field form-row-full <%= errors.name ? 'has-error' : '' %>">
+            <label for="name">Название <span class="required-marker">*</span></label>
+            <input id="name" type="text" name="name" required minlength="2" maxlength="200" value="<%= formData.name || '' %>">
+            <%- include('../../partials/field-error', { field: 'name' }) %>
+        </div>
+
+        <div class="form-field <%= errors.slug ? 'has-error' : '' %>">
+            <label for="slug">Slug (URL) <span class="field-help">если пусто — сгенерируется из названия</span></label>
+            <input id="slug" type="text" name="slug" maxlength="200" value="<%= formData.slug || '' %>" pattern="[a-z0-9\-]*" title="Только латиница, цифры и дефис">
+            <%- include('../../partials/field-error', { field: 'slug' }) %>
+        </div>
+
+        <div class="form-field <%= errors.category ? 'has-error' : '' %>">
+            <label for="category">Категория <span class="required-marker">*</span></label>
+            <select id="category" name="category" required>
+                <% references.roomCategories.forEach(function (opt) { %>
+                    <option value="<%= opt.value %>" <%= formData.category === opt.value ? 'selected' : '' %>><%= opt.label %></option>
+                <% }); %>
+            </select>
+            <%- include('../../partials/field-error', { field: 'category' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.shortDescription ? 'has-error' : '' %>">
+            <label for="shortDescription">Краткое описание <span class="required-marker">*</span> <span class="field-help">для карточек на главной (5-500 символов)</span></label>
+            <input id="shortDescription" type="text" name="shortDescription" required minlength="5" maxlength="500" value="<%= formData.shortDescription || '' %>">
+            <%- include('../../partials/field-error', { field: 'shortDescription' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.description ? 'has-error' : '' %>">
+            <label for="description">Полное описание <span class="required-marker">*</span> <span class="field-help">минимум 10 символов</span></label>
+            <textarea id="description" name="description" required minlength="10" rows="4"><%= formData.description || '' %></textarea>
+            <%- include('../../partials/field-error', { field: 'description' }) %>
+        </div>
+
+        <div class="form-field <%= errors.priceSom ? 'has-error' : '' %>">
+            <label for="priceSom">Цена за ночь, сом <span class="required-marker">*</span></label>
+            <input id="priceSom" type="number" name="priceSom" required min="0" step="100" value="<%= formData.priceSom || 0 %>">
+            <%- include('../../partials/field-error', { field: 'priceSom' }) %>
+        </div>
+
+        <div class="form-field <%= errors.areaSqm ? 'has-error' : '' %>">
+            <label for="areaSqm">Площадь, м² <span class="required-marker">*</span></label>
+            <input id="areaSqm" type="number" name="areaSqm" required min="1" value="<%= formData.areaSqm || 25 %>">
+            <%- include('../../partials/field-error', { field: 'areaSqm' }) %>
+        </div>
+
+        <div class="form-field <%= errors.capacityMin ? 'has-error' : '' %>">
+            <label for="capacityMin">Вместимость от <span class="required-marker">*</span></label>
+            <input id="capacityMin" type="number" name="capacityMin" required min="1" max="20" value="<%= formData.capacityMin || 1 %>">
+            <%- include('../../partials/field-error', { field: 'capacityMin' }) %>
+        </div>
+
+        <div class="form-field <%= errors.capacityMax ? 'has-error' : '' %>">
+            <label for="capacityMax">Вместимость до <span class="required-marker">*</span></label>
+            <input id="capacityMax" type="number" name="capacityMax" required min="1" max="20" value="<%= formData.capacityMax || 2 %>">
+            <%- include('../../partials/field-error', { field: 'capacityMax' }) %>
+        </div>
+
+        <div class="form-field <%= errors.badge ? 'has-error' : '' %>">
+            <label for="badge">Бейдж <span class="field-help">визуальная плашка на карточке</span></label>
+            <select id="badge" name="badge">
+                <% references.roomBadges.forEach(function (opt) { %>
+                    <option value="<%= opt.value %>" <%= (formData.badge || '') === opt.value ? 'selected' : '' %>><%= opt.label %></option>
+                <% }); %>
+            </select>
+            <%- include('../../partials/field-error', { field: 'badge' }) %>
+        </div>
+
+        <div class="form-field <%= errors.order ? 'has-error' : '' %>">
+            <label for="order">Порядок сортировки</label>
+            <input id="order" type="number" name="order" value="<%= formData.order || 0 %>">
+            <%- include('../../partials/field-error', { field: 'order' }) %>
+        </div>
+
+        <div class="form-field form-field--checkbox form-row-full">
+            <input id="featured" type="checkbox" name="featured" value="on" <%= formData.featured ? 'checked' : '' %>>
+            <label for="featured">Показывать на главной</label>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.amenities ? 'has-error' : '' %>">
+            <label>Удобства <span class="field-help">список пунктов, по одному на строку</span></label>
+            <ul id="amenities-list" class="amenities-list">
+                <% var amenityList = (formData.amenities && formData.amenities.length) ? formData.amenities : ['']; %>
+                <% amenityList.forEach(function (text) { %>
+                    <li class="amenity-row">
+                        <input type="text" name="amenities" value="<%= text %>" placeholder="Например: Wi-Fi высокой скорости" maxlength="200">
+                        <button type="button" class="btn-admin btn-sm btn-danger" data-action="remove">×</button>
+                    </li>
+                <% }); %>
+            </ul>
+            <button type="button" id="add-amenity" class="btn-admin btn-sm" style="margin-top:8px;align-self:flex-start"><i class="fas fa-plus"></i> Добавить удобство</button>
+            <%- include('../../partials/field-error', { field: 'amenities' }) %>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary"><%= room ? 'Сохранить' : 'Создать' %></button>
+        <a href="/admin/rooms" class="btn-admin">Отмена</a>
+    </div>
+</form>
+
+<% if (room) { %>
+    <div class="admin-card" style="margin-top: 24px;">
+        <h2 style="margin-bottom: 16px; font-size: 18px;">Изображения</h2>
+
+        <% if (room.images && room.images.length) { %>
+            <div class="image-grid">
+                <% room.images.forEach(function (img) { %>
+                    <div class="image-tile <%= img.isPrimary ? 'is-primary' : '' %>">
+                        <% if (img.isPrimary) { %><div class="is-primary-label">Главное</div><% } %>
+                        <img src="<%= img.path %>" alt="<%= img.alt || '' %>">
+                        <div class="tile-actions">
+                            <% if (!img.isPrimary) { %>
+                                <form action="/admin/rooms/<%= room.id %>/images/<%= img.id %>/primary" method="POST" style="display:inline">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="btn-admin btn-sm">Сделать главным</button>
+                                </form>
+                            <% } %>
+                            <form action="/admin/rooms/<%= room.id %>/images/<%= img.id %>?_method=DELETE" method="POST" data-confirm="Удалить изображение?" style="display:inline">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="btn-admin btn-sm btn-danger">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p class="field-help">Пока изображений нет. Загрузите первое:</p>
+        <% } %>
+
+        <form action="/admin/rooms/<%= room.id %>/images" method="POST" enctype="multipart/form-data" style="margin-top: 16px;">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="form-grid">
+                <div class="form-field">
+                    <label for="image">Файл (jpg/png/webp, до 10 МБ) <span class="required-marker">*</span></label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+                <div class="form-field">
+                    <label for="alt">Alt-текст</label>
+                    <input type="text" id="alt" name="alt" maxlength="200">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-admin btn-primary"><i class="fas fa-upload"></i> Загрузить</button>
+            </div>
+        </form>
+    </div>
+<% } %>

@@ -1,0 +1,19 @@
+
+<section class="page-header">
+    <div class="container">
+        <h1>Ошибка <%= status %></h1>
+        <p><%= message %></p>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <a href="/" class="btn btn-primary btn-large">На главную</a>
+    </div>
+</section>
+
+<% if (stack) { %>
+    <section class="container">
+        <pre style="background:#f4f4f4;padding:1rem;overflow:auto;font-size:12px"><%= stack %></pre>
+    </section>
+<% } %>

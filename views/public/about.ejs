@@ -1,0 +1,93 @@
+
+<section class="page-header">
+    <div class="container">
+        <h1>О нашем центре отдыха</h1>
+        <p>Узнайте больше об Иссык-Куль Резорт</p>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="container">
+        <div class="about-content-detailed">
+            <div class="about-text-full">
+                <h2>Наша история</h2>
+                <% settings.aboutHistory.split('\n').forEach(function (para) { if (para.trim()) { %>
+                    <p><%= para %></p>
+                <% } }); %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="lake-info">
+    <div class="container">
+        <h2 class="section-title">Озеро Иссык-Куль</h2>
+        <div class="lake-grid">
+            <div class="lake-card">
+                <img src="<%= settings.heroImageUrl %>" alt="Озеро Иссык-Куль">
+            </div>
+            <div class="lake-text">
+                <h3>Жемчужина Средней Азии</h3>
+                <% settings.lakeText.split('\n').forEach(function (para) { if (para.trim()) { %>
+                    <p><%= para %></p>
+                <% } }); %>
+                <ul class="lake-features">
+                    <% (settings.lakeStats || []).forEach(function (item) { %>
+                        <li><strong><%= item.label %>:</strong> <%= item.value %></li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services">
+    <div class="container">
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid">
+            <% services.forEach(function (service) { %>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas <%= service.icon %>"></i></div>
+                    <h3><%= service.name %></h3>
+                    <p><%= service.description %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="team">
+    <div class="container">
+        <h2 class="section-title">Наша команда</h2>
+        <p class="team-intro">Профессиональный и дружелюбный персонал к вашим услугам 24/7</p>
+        <div class="team-grid">
+            <% team.forEach(function (member) { %>
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="<%= member.imagePath %>" alt="<%= member.name %>">
+                    </div>
+                    <h3><%= member.name %></h3>
+                    <p class="team-role"><%= member.role %></p>
+                    <% if (member.bio) { %>
+                        <p class="team-bio"><%= member.bio %></p>
+                    <% } %>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="awards">
+    <div class="container">
+        <h2 class="section-title">Награды и сертификаты</h2>
+        <div class="awards-grid">
+            <% awards.forEach(function (award) { %>
+                <div class="award-card">
+                    <div class="award-icon"><i class="fas <%= award.icon %>"></i></div>
+                    <h3><%= award.title %></h3>
+                    <p><%= award.description %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>

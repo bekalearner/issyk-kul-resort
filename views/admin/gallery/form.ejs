@@ -1,0 +1,60 @@
+<div class="admin-toolbar">
+    <a href="/admin/gallery" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+</div>
+
+<form action="<%= item ? '/admin/gallery/' + item.id : '/admin/gallery' %>" method="POST" enctype="multipart/form-data" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (item) { %><input type="hidden" name="_method" value="PUT"><% } %>
+    <div class="form-grid">
+        <div class="form-field form-row-full <%= errors.title ? 'has-error' : '' %>">
+            <label for="title">Название <span class="required-marker">*</span></label>
+            <input id="title" type="text" name="title" required minlength="2" maxlength="200" value="<%= formData.title || '' %>">
+            <%- include('../../partials/field-error', { field: 'title' }) %>
+        </div>
+
+        <div class="form-field <%= errors.category ? 'has-error' : '' %>">
+            <label for="category">Категория <span class="required-marker">*</span></label>
+            <select id="category" name="category" required>
+                <% references.galleryCategories.forEach(function (opt) { %>
+                    <option value="<%= opt.value %>" <%= formData.category === opt.value ? 'selected' : '' %>><%= opt.label %></option>
+                <% }); %>
+            </select>
+            <%- include('../../partials/field-error', { field: 'category' }) %>
+        </div>
+
+        <div class="form-field <%= errors.order ? 'has-error' : '' %>">
+            <label for="order">Порядок</label>
+            <input id="order" type="number" name="order" value="<%= formData.order || 0 %>">
+            <%- include('../../partials/field-error', { field: 'order' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.alt ? 'has-error' : '' %>">
+            <label for="alt">Alt-текст <span class="field-help">для accessibility и SEO</span></label>
+            <input id="alt" type="text" name="alt" maxlength="200" value="<%= formData.alt || '' %>">
+            <%- include('../../partials/field-error', { field: 'alt' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.imagePath ? 'has-error' : '' %>">
+            <label for="imagePath">URL изображения <span class="field-help">или загрузите файл ниже</span></label>
+            <input id="imagePath" type="text" name="imagePath" value="<%= formData.imagePath || '' %>">
+            <%- include('../../partials/field-error', { field: 'imagePath' }) %>
+        </div>
+
+        <div class="form-field form-row-full">
+            <label for="image">Загрузить файл <span class="field-help">jpg/png/webp, до 10 МБ</span></label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary"><%= item ? 'Сохранить' : 'Создать' %></button>
+        <a href="/admin/gallery" class="btn-admin">Отмена</a>
+    </div>
+</form>
+
+<% if (item && item.imagePath) { %>
+    <div class="admin-card" style="margin-top:24px">
+        <h2 style="font-size:18px;margin-bottom:12px">Текущее изображение</h2>
+        <img src="<%= item.imagePath %>" alt="" style="max-width:400px;border-radius:8px">
+    </div>
+<% } %>

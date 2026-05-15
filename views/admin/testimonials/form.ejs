@@ -1,0 +1,52 @@
+<div class="admin-toolbar">
+    <a href="/admin/testimonials" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+</div>
+
+<form action="<%= item ? '/admin/testimonials/' + item.id : '/admin/testimonials' %>" method="POST" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (item) { %><input type="hidden" name="_method" value="PUT"><% } %>    <div class="form-grid">
+        <div class="form-field <%= errors.author ? 'has-error' : '' %>">
+            <label for="author">Автор <span class="required-marker">*</span></label>
+            <input id="author" type="text" name="author" required minlength="2" maxlength="120" value="<%= formData.author || '' %>">
+            <%- include('../../partials/field-error', { field: 'author' }) %>
+        </div>
+
+        <div class="form-field <%= errors.city ? 'has-error' : '' %>">
+            <label for="city">Город <span class="required-marker">*</span></label>
+            <input id="city" type="text" name="city" required minlength="2" maxlength="120" value="<%= formData.city || '' %>">
+            <%- include('../../partials/field-error', { field: 'city' }) %>
+        </div>
+
+        <div class="form-field <%= errors.rating ? 'has-error' : '' %>">
+            <label for="rating">Рейтинг <span class="required-marker">*</span></label>
+            <select id="rating" name="rating" required>
+                <% references.ratingLevels.forEach(function (opt) { %>
+                    <option value="<%= opt.value %>" <%= Number(formData.rating) === opt.value ? 'selected' : '' %>><%= opt.label %></option>
+                <% }); %>
+            </select>
+            <%- include('../../partials/field-error', { field: 'rating' }) %>
+        </div>
+
+        <div class="form-field <%= errors.order ? 'has-error' : '' %>">
+            <label for="order">Порядок</label>
+            <input id="order" type="number" name="order" value="<%= formData.order || 0 %>">
+            <%- include('../../partials/field-error', { field: 'order' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.text ? 'has-error' : '' %>">
+            <label for="text">Текст отзыва <span class="required-marker">*</span> <span class="field-help">10-2000 символов</span></label>
+            <textarea id="text" name="text" rows="4" required minlength="10" maxlength="2000"><%= formData.text || '' %></textarea>
+            <%- include('../../partials/field-error', { field: 'text' }) %>
+        </div>
+
+        <div class="form-field form-field--checkbox form-row-full">
+            <input id="featured" type="checkbox" name="featured" value="on" <%= formData.featured ? 'checked' : '' %>>
+            <label for="featured">Показывать на главной</label>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary"><%= item ? 'Сохранить' : 'Создать' %></button>
+        <a href="/admin/testimonials" class="btn-admin">Отмена</a>
+    </div>
+</form>

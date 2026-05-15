@@ -1,0 +1,179 @@
+
+<section class="page-header">
+    <div class="container">
+        <h1>Свяжитесь с нами</h1>
+        <p>Мы всегда рады ответить на ваши вопросы</p>
+    </div>
+</section>
+
+<section class="contact-info-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                <h3>Телефоны</h3>
+                <p><a href="tel:<%= settings.phonePrimary.replace(/\s+/g, '') %>"><%= settings.phonePrimary %></a></p>
+                <% if (settings.phoneSecondary) { %>
+                    <p><a href="tel:<%= settings.phoneSecondary.replace(/\s+/g, '') %>"><%= settings.phoneSecondary %></a></p>
+                <% } %>
+                <p class="contact-note">Круглосуточно</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Email</h3>
+                <p><a href="mailto:<%= settings.emailPrimary %>"><%= settings.emailPrimary %></a></p>
+                <% if (settings.emailSecondary) { %>
+                    <p><a href="mailto:<%= settings.emailSecondary %>"><%= settings.emailSecondary %></a></p>
+                <% } %>
+                <p class="contact-note">Ответим в течение часа</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Адрес</h3>
+                <p><%= settings.addressLine1 %></p>
+                <p><%= settings.addressLine2 %></p>
+                <% if (settings.addressNote) { %>
+                    <p class="contact-note"><%= settings.addressNote %></p>
+                <% } %>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                <h3>Режим работы</h3>
+                <% const wh = settings.workingHours || {}; %>
+                <% if (wh.reception) { %><p>Регистрация: <%= wh.reception %></p><% } %>
+                <% if (wh.restaurant) { %><p>Ресторан: <%= wh.restaurant %></p><% } %>
+                <% if (wh.beach) { %><p class="contact-note">Пляж: <%= wh.beach %></p><% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form-section" id="contact-form">
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="form-info">
+                <h2>Отправьте нам сообщение</h2>
+                <p>Заполните форму ниже, и наши менеджеры свяжутся с вами в ближайшее время</p>
+
+                <div class="social-links">
+                    <h3>Мы в социальных сетях:</h3>
+                    <div class="social-icons">
+                        <% const social = settings.socialLinks || {}; %>
+                        <% if (social.facebook) { %><a href="<%= social.facebook %>" class="social-icon" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a><% } %>
+                        <% if (social.instagram) { %><a href="<%= social.instagram %>" class="social-icon" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a><% } %>
+                        <% if (social.whatsapp) { %><a href="<%= social.whatsapp %>" class="social-icon" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a><% } %>
+                        <% if (social.telegram) { %><a href="<%= social.telegram %>" class="social-icon" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a><% } %>
+                    </div>
+                </div>
+
+                <% if (settings.transportInfo && settings.transportInfo.length) { %>
+                    <div class="transport-info">
+                        <h3>Как добраться:</h3>
+                        <ul>
+                            <% settings.transportInfo.forEach(function (t) { %>
+                                <li><strong><%= t.label %>:</strong> <%= t.text %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                <% } %>
+            </div>
+
+            <form id="contactForm" class="contact-form" action="/contacts" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="name" required minlength="2" maxlength="120">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+996" minlength="9" maxlength="40">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" maxlength="200">
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Количество гостей</label>
+                    <select id="guests" name="guestCount">
+                        <option value="">Выберите</option>
+                        <option value="1">1 гость</option>
+                        <option value="2">2 гостя</option>
+                        <option value="3">3 гостя</option>
+                        <option value="4">4 гостя</option>
+                        <option value="5+">5+ гостей</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkin">Заезд</label>
+                        <input type="date" id="checkin" name="checkIn">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout">Выезд</label>
+                        <input type="date" id="checkout" name="checkOut">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Ваше сообщение *</label>
+                    <textarea id="message" name="message" rows="5" required minlength="10" maxlength="2000" placeholder="Расскажите о ваших пожеланиях..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">Отправить сообщение</button>
+
+                <p class="form-note">* Обязательные поля</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="map-section">
+    <div class="container">
+        <h2 class="section-title">Наше расположение</h2>
+        <div class="map-wrapper">
+            <div class="map-placeholder">
+                <iframe
+                    src="<%= settings.mapEmbedSrc %>"
+                    width="100%"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+        <div class="faq-grid">
+            <% faqs.forEach(function (faq) { %>
+                <div class="faq-item">
+                    <h3 class="faq-question"><%= faq.question %></h3>
+                    <div class="faq-answer">
+                        <p><%- faq.answer.replace(/\n/g, '<br>') %></p>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Остались вопросы?</h2>
+        <p>Позвоните нам прямо сейчас!</p>
+        <a href="tel:<%= settings.phonePrimary.replace(/\s+/g, '') %>" class="btn btn-primary btn-large"><%= settings.phonePrimary %></a>
+    </div>
+</section>

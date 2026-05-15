@@ -1,0 +1,12 @@
+<header class="admin-header">
+    <h1 class="admin-page-title"><%= typeof title !== 'undefined' && title ? title : '' %></h1>
+    <div class="admin-user">
+        <% if (user) { %>
+            <span><i class="fas fa-user"></i> <%= user.username %></span>
+            <form action="/admin/logout" method="POST" class="admin-logout-form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="admin-link-button"><i class="fas fa-right-from-bracket"></i> Выйти</button>
+            </form>
+        <% } %>
+    </div>
+</header>

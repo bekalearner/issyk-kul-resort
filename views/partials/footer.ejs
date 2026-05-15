@@ -1,0 +1,40 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О нас</h3>
+                <p><%= settings.footerAboutText %></p>
+            </div>
+            <div class="footer-section">
+                <h3>Навигация</h3>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/about">О нас</a></li>
+                    <li><a href="/rooms">Номера</a></li>
+                    <li><a href="/gallery">Галерея</a></li>
+                    <li><a href="/contacts">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> <%= settings.addressLine2 %></li>
+                    <li><i class="fas fa-phone"></i> <%= settings.phonePrimary %></li>
+                    <li><i class="fas fa-envelope"></i> <%= settings.emailPrimary %></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Режим работы</h3>
+                <ul>
+                    <% const wh = settings.workingHours || {}; %>
+                    <% if (wh.reception) { %><li>Регистрация: <%= wh.reception %></li><% } %>
+                    <% if (wh.restaurant) { %><li>Ресторан: <%= wh.restaurant %></li><% } %>
+                    <% if (wh.beach) { %><li>Пляж: <%= wh.beach %></li><% } %>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <%= currentYear %> Иссык-Куль Резорт. Все права защищены.</p>
+        </div>
+    </div>
+</footer>

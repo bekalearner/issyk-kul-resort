@@ -1,0 +1,14 @@
+<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+<script>
+    window.__INITIAL_TOASTS = (function () {
+        var list = [];
+        <% if (typeof flash !== 'undefined' && flash) { %>
+            <% (flash.success || []).forEach(function (m) { %>list.push({ type: 'success', message: <%- JSON.stringify(m) %> });<% }); %>
+            <% (flash.error || []).forEach(function (m) { %>list.push({ type: 'error', message: <%- JSON.stringify(m) %> });<% }); %>
+            <% (flash.warning || []).forEach(function (m) { %>list.push({ type: 'warning', message: <%- JSON.stringify(m) %> });<% }); %>
+            <% (flash.info || []).forEach(function (m) { %>list.push({ type: 'info', message: <%- JSON.stringify(m) %> });<% }); %>
+        <% } %>
+        return list;
+    })();
+</script>
+<script src="/toast.js"></script>

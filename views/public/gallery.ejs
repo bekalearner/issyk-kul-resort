@@ -1,0 +1,50 @@
+
+<section class="page-header">
+    <div class="container">
+        <h1>Фото галерея</h1>
+        <p>Взгляните на красоту нашего курорта</p>
+    </div>
+</section>
+
+<section class="gallery-filter">
+    <div class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn <%= activeCategory === 'all' ? 'active' : '' %>" data-filter="all">Все фото</button>
+            <button class="filter-btn <%= activeCategory === 'lake' ? 'active' : '' %>" data-filter="lake">Озеро</button>
+            <button class="filter-btn <%= activeCategory === 'rooms' ? 'active' : '' %>" data-filter="rooms">Номера</button>
+            <button class="filter-btn <%= activeCategory === 'food' ? 'active' : '' %>" data-filter="food">Ресторан</button>
+            <button class="filter-btn <%= activeCategory === 'activities' ? 'active' : '' %>" data-filter="activities">Развлечения</button>
+        </div>
+    </div>
+</section>
+
+<section class="gallery">
+    <div class="container">
+        <div class="gallery-grid">
+            <% items.forEach(function (item) { %>
+                <div class="gallery-item" data-category="<%= item.category.toLowerCase() %>">
+                    <img src="<%= item.imagePath %>" alt="<%= item.alt || item.title %>">
+                    <div class="gallery-overlay">
+                        <h3><%= item.title %></h3>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<div id="imageModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImage" alt="">
+    <div id="modalCaption"></div>
+    <button class="modal-nav modal-prev">‹</button>
+    <button class="modal-nav modal-next">›</button>
+</div>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Готовы испытать это сами?</h2>
+        <p>Забронируйте номер и станьте частью нашей истории</p>
+        <a href="/rooms" class="btn btn-primary btn-large">Посмотреть номера</a>
+    </div>
+</section>

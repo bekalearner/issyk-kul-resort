@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <h2><i class="fas fa-umbrella-beach"></i> Иссык-Куль Резорт</h2>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="<%= activeNav === 'home' ? 'active' : '' %>">Главная</a></li>
+                <li><a href="/about" class="<%= activeNav === 'about' ? 'active' : '' %>">О нас</a></li>
+                <li><a href="/rooms" class="<%= activeNav === 'rooms' ? 'active' : '' %>">Номера</a></li>
+                <li><a href="/gallery" class="<%= activeNav === 'gallery' ? 'active' : '' %>">Галерея</a></li>
+                <li><a href="/contacts" class="<%= activeNav === 'contacts' ? 'active' : '' %>">Контакты</a></li>
+            </ul>
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+.DS_Store
+.idea/
+.vscode/
+coverage/
+public/uploads/originals/*
+public/uploads/large/*
+public/uploads/thumb/*
+!public/uploads/originals/.gitkeep
+!public/uploads/large/.gitkeep
+!public/uploads/thumb/.gitkeep

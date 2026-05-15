@@ -1,0 +1,29 @@
+<div class="admin-toolbar">
+    <h2>FAQ (<%= items.length %>)</h2>
+    <a href="/admin/faqs/new" class="btn-admin btn-primary"><i class="fas fa-plus"></i> Добавить</a>
+</div>
+
+<% if (items.length) { %>
+    <table class="admin-table">
+        <thead><tr><th>Вопрос</th><th>Активен</th><th>Порядок</th><th class="col-actions"></th></tr></thead>
+        <tbody>
+            <% items.forEach(function (s) { %>
+                <tr>
+                    <td><strong><%= s.question %></strong></td>
+                    <td>
+                        <% if (s.active) { %><span class="badge badge--active">Да</span>
+                        <% } else { %><span class="badge badge--inactive">Нет</span><% } %>
+                    </td>
+                    <td><%= s.order %></td>
+                    <td class="col-actions">
+                        <a href="/admin/faqs/<%= s.id %>/edit" class="btn-admin btn-sm btn-link">Изменить</a>
+                        <form action="/admin/faqs/<%= s.id %>?_method=DELETE" method="POST" data-confirm="Удалить?" style="display:inline">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn-admin btn-sm btn-link btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %><div class="empty-state"><i class="fas fa-circle-question"></i><p>Пусто</p></div><% } %>

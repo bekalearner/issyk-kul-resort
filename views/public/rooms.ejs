@@ -1,0 +1,89 @@
+
+<section class="page-header">
+    <div class="container">
+        <h1>Наши номера</h1>
+        <p>Выберите идеальное размещение для вашего отдыха</p>
+    </div>
+</section>
+
+<section class="room-filter">
+    <div class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Все номера</button>
+            <button class="filter-btn" data-filter="standard">Стандарт</button>
+            <button class="filter-btn" data-filter="deluxe">Люкс</button>
+            <button class="filter-btn" data-filter="cottage">Коттеджи</button>
+        </div>
+    </div>
+</section>
+
+<section class="rooms-list">
+    <div class="container">
+        <div class="rooms-detailed-grid">
+            <% rooms.forEach(function (room) { %>
+                <div class="room-detailed-card" data-category="<%= room.category.toLowerCase() %>">
+                    <div class="room-detailed-image">
+                        <% const primary = room.images.find(function (img) { return img.isPrimary; }) || room.images[0]; %>
+                        <% if (primary) { %>
+                            <img src="<%= primary.path %>" alt="<%= primary.alt || room.name %>">
+                        <% } else { %>
+                            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=700&h=500&fit=crop" alt="<%= room.name %>">
+                        <% } %>
+                        <% if (room.badge) { %>
+                            <div class="room-badge"><%= room.badge %></div>
+                        <% } %>
+                    </div>
+                    <div class="room-detailed-info">
+                        <h3><%= room.name %></h3>
+                        <p class="room-description"><%= room.description %></p>
+
+                        <% if (room.amenities && room.amenities.length) { %>
+                            <div class="room-amenities">
+                                <h4>Удобства:</h4>
+                                <ul>
+                                    <% room.amenities.forEach(function (a) { %>
+                                        <li>✓ <%= a.text %></li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        <% } %>
+
+                        <div class="room-capacity">
+                            <span><i class="fas fa-users"></i> Вместимость:
+                                <% if (room.capacityMin === room.capacityMax) { %>
+                                    <%= room.capacityMax %> <%= room.capacityMax === 1 ? 'человек' : 'человека' %>
+                                <% } else { %>
+                                    <%= room.capacityMin %>-<%= room.capacityMax %> человек
+                                <% } %>
+                            </span>
+                            <span><i class="fas fa-ruler-combined"></i> Площадь: <%= room.areaSqm %> м²</span>
+                        </div>
+
+                        <div class="room-price-block">
+                            <div class="price-info">
+                                <span class="price-label">Цена за ночь:</span>
+                                <span class="price-amount"><%= room.priceSom.toLocaleString('ru-RU') %> сом</span>
+                            </div>
+                            <a href="/rooms/<%= room.slug %>" class="btn btn-secondary btn-small">Подробнее</a>
+                            <a href="/contacts" class="btn btn-primary booking-btn">Забронировать</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="booking-info">
+    <div class="container">
+        <h2 class="section-title">Условия бронирования</h2>
+        <div class="info-grid">
+            <% bookingConditions.forEach(function (cond) { %>
+                <div class="info-card">
+                    <h3><%= cond.title %></h3>
+                    <p><%- cond.content.replace(/\n/g, '<br>') %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>

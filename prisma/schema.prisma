@@ -1,0 +1,199 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoomCategory {
+  STANDARD
+  DELUXE
+  COTTAGE
+}
+
+enum GalleryCategory {
+  LAKE
+  ROOMS
+  FOOD
+  ACTIVITIES
+}
+
+model Room {
+  id               String        @id @default(cuid())
+  slug             String        @unique
+  name             String
+  category         RoomCategory
+  description      String
+  shortDescription String
+  priceSom         Int
+  areaSqm          Int
+  capacityMin      Int
+  capacityMax      Int
+  badge            String?
+  featured         Boolean       @default(false)
+  order            Int           @default(0)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  images           RoomImage[]
+  amenities        RoomAmenity[]
+
+  @@index([featured, order])
+  @@index([category, order])
+}
+
+model RoomImage {
+  id        String  @id @default(cuid())
+  roomId    String
+  room      Room    @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  path      String
+  alt       String?
+  isPrimary Boolean @default(false)
+  order     Int     @default(0)
+
+  @@index([roomId, order])
+}
+
+model RoomAmenity {
+  id     String @id @default(cuid())
+  roomId String
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  text   String
+  order  Int    @default(0)
+
+  @@index([roomId, order])
+}
+
+model GalleryItem {
+  id        String          @id @default(cuid())
+  title     String
+  category  GalleryCategory
+  imagePath String
+  alt       String?
+  order     Int             @default(0)
+  createdAt DateTime        @default(now())
+
+  @@index([category, order])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  text      String
+  author    String
+  city      String
+  rating    Int      @default(5)
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([featured, order])
+}
+
+model Service {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  icon        String
+  order       Int    @default(0)
+
+  @@index([order])
+}
+
+model TeamMember {
+  id        String  @id @default(cuid())
+  name      String
+  role      String
+  bio       String?
+  imagePath String
+  order     Int     @default(0)
+
+  @@index([order])
+}
+
+model Feature {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  order       Int    @default(0)
+
+  @@index([order])
+}
+
+model Award {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  order       Int    @default(0)
+
+  @@index([order])
+}
+
+model Faq {
+  id       String  @id @default(cuid())
+  question String
+  answer   String
+  order    Int     @default(0)
+  active   Boolean @default(true)
+
+  @@index([active, order])
+}
+
+model BookingCondition {
+  id      String @id @default(cuid())
+  title   String
+  content String
+  icon    String @default("fa-info-circle")
+  order   Int    @default(0)
+
+  @@index([order])
+}
+
+model ContactMessage {
+  id         String    @id @default(cuid())
+  name       String
+  phone      String
+  email      String?
+  guestCount String?
+  checkIn    DateTime?
+  checkOut   DateTime?
+  message    String
+  read       Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+
+  @@index([read, createdAt(sort: Desc)])
+}
+
+model SiteSettings {
+  id                 Int      @id @default(1)
+  phonePrimary       String
+  phoneSecondary     String?
+  emailPrimary       String
+  emailSecondary     String?
+  addressLine1       String
+  addressLine2       String
+  addressNote        String?
+  workingHours       Json
+  heroTitle          String
+  heroSubtitle       String
+  heroImageUrl       String
+  aboutPreviewTitle  String
+  aboutPreviewText   String
+  aboutHistory       String
+  lakeText           String
+  lakeStats          Json
+  socialLinks        Json
+  mapEmbedSrc        String
+  footerAboutText    String
+  transportInfo      Json
+  updatedAt          DateTime @updatedAt
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}

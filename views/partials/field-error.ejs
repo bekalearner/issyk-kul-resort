@@ -1,0 +1,6 @@
+<%
+    var fieldErrors = (typeof errors !== 'undefined' && errors && errors[field]) || null;
+%>
+<% if (fieldErrors && fieldErrors.length) { %>
+    <div class="field-error"><%= fieldErrors[0] %></div>
+<% } %>

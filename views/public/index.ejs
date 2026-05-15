@@ -1,0 +1,89 @@
+
+<section class="hero" style="background-image: linear-gradient(rgba(0, 51, 102, 0.4), rgba(0, 51, 102, 0.4)), url('<%= settings.heroImageUrl %>')">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title"><%= settings.heroTitle %></h1>
+        <p class="hero-subtitle"><%= settings.heroSubtitle %></p>
+        <a href="/rooms" class="btn btn-primary">Забронировать номер</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="features-grid">
+            <% features.forEach(function (feature) { %>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas <%= feature.icon %>"></i></div>
+                    <h3><%= feature.title %></h3>
+                    <p><%= feature.description %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="about-preview">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2><%= settings.aboutPreviewTitle %></h2>
+                <% settings.aboutPreviewText.split('\n').forEach(function (para) { if (para.trim()) { %>
+                    <p><%= para %></p>
+                <% } }); %>
+                <a href="/about" class="btn btn-secondary">Узнать больше</a>
+            </div>
+            <div class="about-image">
+                <img src="<%= settings.heroImageUrl %>" alt="Иссык-Куль">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="rooms-preview">
+    <div class="container">
+        <h2 class="section-title">Наши номера</h2>
+        <div class="rooms-grid">
+            <% rooms.forEach(function (room) { %>
+                <div class="room-card">
+                    <div class="room-image">
+                        <% const primary = room.images.find(function (img) { return img.isPrimary; }) || room.images[0]; %>
+                        <% if (primary) { %>
+                            <img src="<%= primary.path %>" alt="<%= primary.alt || room.name %>">
+                        <% } else { %>
+                            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop" alt="<%= room.name %>">
+                        <% } %>
+                        <% if (room.badge) { %>
+                            <div class="room-badge"><%= room.badge %></div>
+                        <% } %>
+                    </div>
+                    <div class="room-info">
+                        <h3><%= room.name %></h3>
+                        <p><%= room.shortDescription %></p>
+                        <div class="room-price">
+                            <span class="price">от <%= room.priceSom.toLocaleString('ru-RU') %> сом/ночь</span>
+                            <a href="/rooms/<%= room.slug %>" class="btn btn-small">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <h2 class="section-title">Отзывы наших гостей</h2>
+        <div class="testimonials-grid">
+            <% testimonials.forEach(function (t) { %>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <% for (var i = 0; i < t.rating; i++) { %><i class="fas fa-star"></i><% } %>
+                    </div>
+                    <p class="testimonial-text">«<%= t.text %>»</p>
+                    <p class="testimonial-author">— <%= t.author %>, <%= t.city %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>

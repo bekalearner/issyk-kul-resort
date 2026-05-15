@@ -1,0 +1,41 @@
+<div class="admin-toolbar">
+    <a href="/admin/messages" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+    <form action="/admin/messages/<%= message.id %>?_method=DELETE" method="POST" data-confirm="Удалить сообщение?">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="btn-admin btn-danger"><i class="fas fa-trash"></i> Удалить</button>
+    </form>
+</div>
+
+<div class="admin-card">
+    <h2 style="margin-bottom: 8px"><%= message.name %></h2>
+    <div class="field-help" style="margin-bottom:20px">
+        <%= new Date(message.createdAt).toLocaleString('ru-RU') %>
+    </div>
+
+    <div class="form-grid">
+        <div class="form-field">
+            <label>Телефон</label>
+            <p><a href="tel:<%= message.phone.replace(/\s+/g, '') %>"><%= message.phone %></a></p>
+        </div>
+        <div class="form-field">
+            <label>Email</label>
+            <p><% if (message.email) { %><a href="mailto:<%= message.email %>"><%= message.email %></a><% } else { %>—<% } %></p>
+        </div>
+        <div class="form-field">
+            <label>Количество гостей</label>
+            <p><%= message.guestCount || '—' %></p>
+        </div>
+        <div class="form-field">
+            <label>Заезд</label>
+            <p><%= message.checkIn ? new Date(message.checkIn).toLocaleDateString('ru-RU') : '—' %></p>
+        </div>
+        <div class="form-field">
+            <label>Выезд</label>
+            <p><%= message.checkOut ? new Date(message.checkOut).toLocaleDateString('ru-RU') : '—' %></p>
+        </div>
+        <div class="form-field form-row-full">
+            <label>Сообщение</label>
+            <div style="background:#f9fafc;padding:16px;border-radius:8px;white-space:pre-wrap;line-height:1.6"><%= message.message %></div>
+        </div>
+    </div>
+</div>

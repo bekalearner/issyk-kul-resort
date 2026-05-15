@@ -1,0 +1,37 @@
+<div class="admin-toolbar">
+    <a href="/admin/services" class="btn-admin"><i class="fas fa-arrow-left"></i> К списку</a>
+</div>
+
+<form action="<%= item ? '/admin/services/' + item.id : '/admin/services' %>" method="POST" class="admin-form" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (item) { %><input type="hidden" name="_method" value="PUT"><% } %>    <div class="form-grid">
+        <div class="form-field form-row-full <%= errors.name ? 'has-error' : '' %>">
+            <label for="name">Название <span class="required-marker">*</span></label>
+            <input id="name" type="text" name="name" required minlength="2" maxlength="200" value="<%= formData.name || '' %>">
+            <%- include('../../partials/field-error', { field: 'name' }) %>
+        </div>
+
+        <div class="form-field form-row-full <%= errors.description ? 'has-error' : '' %>">
+            <label for="description">Описание <span class="required-marker">*</span> <span class="field-help">5-1000 символов</span></label>
+            <textarea id="description" name="description" rows="3" required minlength="5" maxlength="1000"><%= formData.description || '' %></textarea>
+            <%- include('../../partials/field-error', { field: 'description' }) %>
+        </div>
+
+        <div class="form-field <%= errors.icon ? 'has-error' : '' %>">
+            <label for="icon">Иконка <span class="required-marker">*</span></label>
+            <%- include('../../partials/icon-select', { name: 'icon', id: 'icon', value: formData.icon || '', isRequired: true }) %>
+            <%- include('../../partials/field-error', { field: 'icon' }) %>
+        </div>
+
+        <div class="form-field <%= errors.order ? 'has-error' : '' %>">
+            <label for="order">Порядок</label>
+            <input id="order" type="number" name="order" value="<%= formData.order || 0 %>">
+            <%- include('../../partials/field-error', { field: 'order' }) %>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-admin btn-primary"><%= item ? 'Сохранить' : 'Создать' %></button>
+        <a href="/admin/services" class="btn-admin">Отмена</a>
+    </div>
+</form>

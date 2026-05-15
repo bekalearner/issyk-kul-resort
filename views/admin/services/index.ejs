@@ -1,0 +1,27 @@
+<div class="admin-toolbar">
+    <h2>Услуги (<%= items.length %>)</h2>
+    <a href="/admin/services/new" class="btn-admin btn-primary"><i class="fas fa-plus"></i> Добавить</a>
+</div>
+
+<% if (items.length) { %>
+    <table class="admin-table">
+        <thead><tr><th>Иконка</th><th>Название</th><th>Описание</th><th>Порядок</th><th class="col-actions"></th></tr></thead>
+        <tbody>
+            <% items.forEach(function (s) { %>
+                <tr>
+                    <td><i class="fas <%= s.icon %>" style="font-size:20px;color:var(--admin-primary)"></i></td>
+                    <td><strong><%= s.name %></strong></td>
+                    <td><%= (s.description || '').slice(0, 100) %></td>
+                    <td><%= s.order %></td>
+                    <td class="col-actions">
+                        <a href="/admin/services/<%= s.id %>/edit" class="btn-admin btn-sm btn-link">Изменить</a>
+                        <form action="/admin/services/<%= s.id %>?_method=DELETE" method="POST" data-confirm="Удалить услугу?" style="display:inline">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn-admin btn-sm btn-link btn-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %><div class="empty-state"><i class="fas fa-concierge-bell"></i><p>Нет услуг</p></div><% } %>

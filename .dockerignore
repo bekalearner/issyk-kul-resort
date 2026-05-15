@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.env.local
+.git
+.gitignore
+.vscode
+.idea
+*.log
+coverage
+README.md
+docker-compose*.yml
+.dockerignore
+.DS_Store
+public/uploads/*/!.gitkeep

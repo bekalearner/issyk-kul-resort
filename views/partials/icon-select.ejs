@@ -1,0 +1,21 @@
+<%
+    var fieldName = typeof name !== 'undefined' ? name : 'icon';
+    var fieldId = typeof id !== 'undefined' ? id : fieldName;
+    var currentValue = typeof value !== 'undefined' ? value : '';
+    var required = typeof isRequired !== 'undefined' ? isRequired : true;
+%>
+<div class="icon-select-wrap" data-icon-select>
+    <select id="<%= fieldId %>" name="<%= fieldName %>" <%= required ? 'required' : '' %> data-icon-input>
+        <option value="">— Выберите иконку —</option>
+        <% references.iconCatalog.forEach(function (group) { %>
+            <optgroup label="<%= group.label %>">
+                <% group.items.forEach(function (icon) { %>
+                    <option value="<%= icon.value %>" <%= currentValue === icon.value ? 'selected' : '' %>><%= icon.label %> (<%= icon.value %>)</option>
+                <% }); %>
+            </optgroup>
+        <% }); %>
+    </select>
+    <span class="icon-preview" data-icon-preview>
+        <i class="fas <%= currentValue || 'fa-question' %>"></i>
+    </span>
+</div>

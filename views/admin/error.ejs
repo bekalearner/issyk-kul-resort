@@ -1,0 +1,10 @@
+<div class="admin-card">
+    <h2>Ошибка <%= status %></h2>
+    <p style="margin-top: 12px;"><%= message %></p>
+    <% if (stack) { %>
+        <pre style="background:#f4f4f4;padding:1rem;overflow:auto;font-size:12px;margin-top:16px"><%= stack %></pre>
+    <% } %>
+    <div class="form-actions">
+        <a href="/admin" class="btn-admin btn-primary">На главную админки</a>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="admin-toolbar">
+    <h2>Галерея (<%= items.length %>)</h2>
+    <a href="/admin/gallery/new" class="btn-admin btn-primary"><i class="fas fa-plus"></i> Добавить фото</a>
+</div>
+
+<% if (items.length) { %>
+    <div class="image-grid">
+        <% items.forEach(function (item) { %>
+            <div class="image-tile">
+                <img src="<%= item.imagePath %>" alt="<%= item.alt || '' %>">
+                <div style="padding: 10px;">
+                    <strong style="font-size:13px"><%= item.title %></strong>
+                    <div class="field-help"><%= item.category %> · #<%= item.order %></div>
+                </div>
+                <div class="tile-actions">
+                    <a href="/admin/gallery/<%= item.id %>/edit" class="btn-admin btn-sm btn-link">Изменить</a>
+                    <form action="/admin/gallery/<%= item.id %>?_method=DELETE" method="POST" data-confirm="Удалить фото?" style="display:inline">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit" class="btn-admin btn-sm btn-danger">×</button>
+                    </form>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+<% } else { %>
+    <div class="empty-state"><i class="fas fa-images"></i><p>Галерея пуста</p></div>
+<% } %>

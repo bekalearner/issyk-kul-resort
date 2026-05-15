@@ -1,0 +1,21 @@
+<div class="admin-login-card">
+    <h1><i class="fas fa-umbrella-beach"></i> Иссык-Куль</h1>
+    <p class="lead">Вход в админ-панель</p>
+    <form action="/admin/login" method="POST" class="form-grid form-grid--full admin-form" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <div class="form-field <%= errors.username ? 'has-error' : '' %>">
+            <label for="username">Логин</label>
+            <input type="text" id="username" name="username" autocomplete="username" required autofocus value="<%= formData.username || '' %>">
+            <%- include('../partials/field-error', { field: 'username' }) %>
+        </div>
+
+        <div class="form-field <%= errors.password ? 'has-error' : '' %>">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+            <%- include('../partials/field-error', { field: 'password' }) %>
+        </div>
+
+        <button type="submit" class="btn-admin btn-primary" style="margin-top: 16px;">Войти</button>
+    </form>
+</div>

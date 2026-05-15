@@ -1,0 +1,64 @@
+
+<section class="page-header">
+    <div class="container">
+        <h1><%= room.name %></h1>
+        <p><%= room.shortDescription %></p>
+    </div>
+</section>
+
+<section class="room-detail">
+    <div class="container">
+        <div class="room-detailed-card room-detailed-card--single">
+            <div class="room-detailed-image">
+                <% const primary = room.images.find(function (img) { return img.isPrimary; }) || room.images[0]; %>
+                <% if (primary) { %>
+                    <img src="<%= primary.path %>" alt="<%= primary.alt || room.name %>">
+                <% } else { %>
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=900&h=600&fit=crop" alt="<%= room.name %>">
+                <% } %>
+                <% if (room.badge) { %>
+                    <div class="room-badge"><%= room.badge %></div>
+                <% } %>
+            </div>
+
+            <% if (room.images && room.images.length > 1) { %>
+                <div class="room-detail-gallery">
+                    <% room.images.forEach(function (img) { %>
+                        <div class="gallery-item">
+                            <img src="<%= img.path %>" alt="<%= img.alt || room.name %>">
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+
+            <div class="room-detailed-info">
+                <p class="room-description"><%- room.description.replace(/\n/g, '<br>') %></p>
+
+                <% if (room.amenities && room.amenities.length) { %>
+                    <div class="room-amenities">
+                        <h4>Удобства:</h4>
+                        <ul>
+                            <% room.amenities.forEach(function (a) { %>
+                                <li>✓ <%= a.text %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                <% } %>
+
+                <div class="room-capacity">
+                    <span><i class="fas fa-users"></i> Вместимость: <%= room.capacityMin %>-<%= room.capacityMax %> человек</span>
+                    <span><i class="fas fa-ruler-combined"></i> Площадь: <%= room.areaSqm %> м²</span>
+                </div>
+
+                <div class="room-price-block">
+                    <div class="price-info">
+                        <span class="price-label">Цена за ночь:</span>
+                        <span class="price-amount"><%= room.priceSom.toLocaleString('ru-RU') %> сом</span>
+                    </div>
+                    <a href="/contacts" class="btn btn-primary booking-btn">Связаться для брони</a>
+                    <a href="/rooms" class="btn btn-secondary">Все номера</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
