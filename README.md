@@ -90,9 +90,18 @@ Entrypoint app-контейнера автоматически выполняе�
 
 ```bash
 cp .env.example .env
-docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+# Сборка БЕЗ Docker build-кэша (свежие deps / Prisma client / dist) + подъём стека
+npm run docker:dev
+
+# Применить миграции (в dev CMD из Dockerfile перекрыт `npm run dev`, авто-миграций нет)
+docker compose -f docker-compose.yml -f docker-compose.dev.yml exec app npx prisma migrate deploy
+
+# Начальные данные
 docker compose -f docker-compose.yml -f docker-compose.dev.yml exec app npm run seed
 ```
+
+Скрипт `npm run docker:dev` всегда выполняет `docker compose build --no-cache --pull`, поэтому Docker build-кэш сбрасывается при каждом запуске. Остановить стек — `npm run docker:dev:down`, логи — `npm run docker:dev:logs` (или команда ниже).
 
 Что даёт dev-стек:
 - **tsx watch** перезапускает сервер при любых изменениях в `src/`
@@ -224,6 +233,11 @@ issyk-kul-resort/
 | `npm run prisma:migrate` | `prisma migrate dev` — создать миграцию |
 | `npm run prisma:deploy` | `prisma migrate deploy` — применить миграции в проде |
 | `npm run prisma:generate` | Сгенерировать Prisma Client |
+| `npm run docker:dev` | Пересобрать образ **без build-кэша** (`--no-cache --pull`) и поднять dev-стек |
+| `npm run docker:dev:down` | Остановить dev-стек |
+| `npm run docker:dev:logs` | Логи app в dev-стеке (`-f`) |
+| `npm run docker:prod` | Пересобрать образ **без build-кэша** и поднять prod-стек |
+| `npm run docker:prod:down` | Остановить prod-стек |
 | `npm run lint` | ESLint |
 | `npm run format` | Prettier для `src/**/*.ts` и `views/**/*.ejs` |
 
